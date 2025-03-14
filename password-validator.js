@@ -1,11 +1,30 @@
 const readline = require(`readline-sync`);
 
-let password;
-const minLength = 8;
-const hasUpperCase = /[A-Z]/.test(password);
-const hasNumber = /[0-9]/.test(password);
-do {
-    password = readline.question("Please Enter a Password that has at least 1 capital letter, 1 number, and is over 8 character in length:");
+let password ="";
+let isValid = false;
 
-}while (password.length = minLength && hasUpperCase && hasNumber);
-console.log("Password Accepted");
+while(!isValid){
+    password = readline.question("Enter a password: ", {hideEchoBack:true});
+
+    let hasUpperCase = false;
+    let hasNumber = false;
+    let length = password.length;
+
+    for (let i =0; i < length; i++){
+        let char = password[i];
+        if (char >= 'A' && char <= 'Z') {
+            hasUpperCase = true;
+        }
+        if (char >= '0' && char <= '9') {
+            hasNumber =true;
+        }
+    }   
+
+        if (length >= 8 && hasUpperCase && hasNumber) {
+        isValid = true;
+    }else {
+    console.log("Password must be at least 8 characters long, contain at least on uppercase letter, and one number.");
+    }
+}
+
+console.log("Password Successfull set!");
